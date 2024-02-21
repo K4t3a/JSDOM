@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSDOMKT1</title>
+</head>
+
+<body>
+  <table id="Table"></table>
+  <script>
+    function foo() {
+      let randomNum = Math.floor(Math.random() * 100);
+      let table = document.getElementById('Table');
+      let newCell = document.createElement('td');
+      newCell.textContent = randomNum;
+      let cellColor = randomNum >= 50 ? 'orange' : 'white';
+      newCell.style.backgroundColor = cellColor;
+
+      let cellsCount = table.getElementsByTagName('td').length;
+
+      let rowNumber = Math.floor(cellsCount / 6);
+      let colNumber = cellsCount % 6;
+
+      if (!table.rows[rowNumber]) {
+        table.insertRow(rowNumber);
+      }
+
+      table.rows[rowNumber].appendChild(newCell);
+    }
+
+    let numbers = [];
+    for (let i = 0; i < 30; i++) {
+      numbers.push(Math.floor(Math.random() * 100));
+    }
+
+    let table = "<table>\n";
+    for (let i = 0; i < 5; i++) {
+      table += "  <tr>\n";
+      for (let j = 0; j < 6; j++) {
+        let number = numbers[i * 6 + j];
+        let cellColor = (number >= 50) ? "orange" : "white";
+        table += "    <td style='background-color:" + cellColor + "'>" + number + "</td>\n";
+      }
+      table += "  </tr>\n";
+    }
+    table += "</table>";
+
+    document.write(table);
+  </script>
+    <button style="background-color: yellow;" onclick="foo()">Добавить число</button>
+</body>
+
+</html>
